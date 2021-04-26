@@ -1,0 +1,19 @@
+{
+  "name": "promise-app",
+  "version": "1.0.0",
+  "description": "Undestanding Promise in JavaScript",
+  "main": "even.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Promise",
+    "Callback",
+    "JavaScript"
+  ],
+  "author": "Zaki Mohammed",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
