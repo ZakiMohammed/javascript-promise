@@ -13,4 +13,5 @@ const fetchUserById = (id) => {
 
 fetchUserById(1)
     .then(user => console.log('User:', user))
-    .catch(err => console.log('Error:', err));
+    .catch(err => console.log('Error:', err))
+    .finally(() => console.log('I am Inevitable'));

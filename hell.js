@@ -45,7 +45,8 @@ fetchUserById(1)
         return Promise.all(result.posts.map(i => fetchCommentsByPostId(i.id)));
     })
     .then(comments => {
-        result.posts.forEach((post, index) => result.posts[index].comments = comments[index]);
+        console.log(comments);
+        result.posts.forEach(post => post.comments = comments.flat().filter(i => i.postId === post.id));
         return result;
     })
     .then(result => console.log('User:', result))
