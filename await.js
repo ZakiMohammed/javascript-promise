@@ -33,20 +33,18 @@ const fetchCommentsByPostId = (postId) => {
     });
 };
 
-let result;
+(async function () {
+    try {
+        const user = await fetchUserById(1);
+        const posts = await fetchPostsByUserId(user.id);
+        const comments = await Promise.all(posts.map(i => fetchCommentsByPostId(i.id)));
 
-fetchUserById(1)
-    .then(user => {
-        result = user;
-        return fetchPostsByUserId(user.id);
-    })
-    .then(posts => {
-        result.posts = posts;
-        return Promise.all(result.posts.map(i => fetchCommentsByPostId(i.id)));
-    })
-    .then(comments => {
-        result.posts.forEach(post => post.comments = comments.flat().filter(i => i.postId === post.id));
-        return result;
-    })
-    .then(result => console.log('User:', result))
-    .catch(error => console.log('Error:', error));
+        user.posts = posts.map(post => ({
+            ...post,
+            comments: comments.flat().filter(i => i.postId === post.id)
+        }));
+        console.log('User:', user);
+    } catch (error) {
+        console.log('Error:', error)
+    }
+})();
